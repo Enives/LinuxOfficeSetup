@@ -15,8 +15,11 @@ if [ ! -f "$SCRIPT_DIR/LICENSE" ]; then
   exit 1
 fi
 
-# Name des neuen Benutzers (ohne Passwort)
+# Name des neuen Benutzers
 USERNAME="nutzer"
+
+# Standard-Passwort für den neuen Benutzer
+PASSWORD="mein_passwort"  # Hier kannst du das Standardpasswort setzen
 
 # Neuen Benutzer ohne Passwort erstellen
 useradd -m -s /bin/bash "$USERNAME"
@@ -24,6 +27,10 @@ useradd -m -s /bin/bash "$USERNAME"
 # Überprüfen, ob der Benutzer erfolgreich erstellt wurde
 if [ $? -eq 0 ]; then
   echo "Benutzer $USERNAME wurde erfolgreich erstellt."
+
+  # Passwort für den neuen Benutzer setzen
+  echo "$USERNAME:$PASSWORD" | chpasswd
+  echo "Passwort für $USERNAME wurde gesetzt."
 
   # Verzeichnis-Pfade, die erstellt werden sollen
   DIRS=("Ordner1" "Ordner2" "Ordner3" "program")
