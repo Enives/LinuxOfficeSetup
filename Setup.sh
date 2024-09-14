@@ -6,6 +6,15 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+# Verzeichnis, in dem das Skript liegt
+SCRIPT_DIR=$(dirname "$0")
+
+# Überprüfen, ob die Datei LICENCE existiert
+if [ ! -f "$SCRIPT_DIR/LICENSE" ]; then
+  echo "Keine Lizenz gefunden. Bitte stelle sicher, dass sie im gleichen Verzeichnis wie das Skript vorhanden ist."
+  exit 1
+fi
+
 # Name des neuen Benutzers (ohne Passwort)
 USERNAME="nutzer"
 
